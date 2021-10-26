@@ -116,13 +116,14 @@ function App() {
     auth.register({ password, email })
       .then(() => {
         setRegSuccess(true);
-        setInfoTooltipPopupOpen(true);
         history.push('/sign-in');
       })
       .catch((err) => {
         setRegSuccess(false);
-        setInfoTooltipPopupOpen(true);
         console.log(err);
+      })
+      .finally(() => {
+        setInfoTooltipPopupOpen(true);
       })
   }
 
@@ -152,6 +153,9 @@ function App() {
         .then((res) => {
           setUserEmail(res.data.email)
           setLoggedIn(true);
+        })
+        .catch((err) => {
+          console.log(err);
         });
     }
   }
